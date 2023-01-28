@@ -3,7 +3,7 @@
 const ENDPOINT = "https://restcountries.com/v3.1/name"
 
 function fetchCountries(name){
-return fetch(`${ENDPOINT}/${name}?fields=name.official,capital,population,flags,languages`)
+return fetch(`${ENDPOINT}/${name}?fields=name,capital,population,flags,languages`)
 .then((res) => res.json())
 };
 
@@ -23,3 +23,4 @@ export default { fetchCountries };
 // population - населення
 // flags.svg - посилання на зображення прапора
 // languages - масив мов
+

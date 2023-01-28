@@ -21,16 +21,19 @@ function onInput(e){
     const inputValue = form.value;
     // console.log(inputValue);
     API.fetchCountries(inputValue).then((data) => {
-        console.log(data);
+        console.log(createMarkup(data));
     });
     };
 
 
-    function createMarkup({name, capital, population, flags, languages}){
-        return
-        `
+    function createMarkup({ capital, population, flags, languages}){
+        return `
         <div class="countrie-card"
-        flags.svg
+        <h2>${name}</h2>
+        <p>Capital: ${capital}</p>
+        <p>Population: ${population}</p>
+        <p>Languages: ${languages}</p>
+        </div>
         `
     }
 
