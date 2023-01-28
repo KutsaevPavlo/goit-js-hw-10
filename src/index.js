@@ -26,7 +26,7 @@ function onInput(e){
     };
 
 
-    function createMarkup({name.official, capital, population, flags, languages}){
+    function createMarkup({name, capital, population, flags, languages}){
         return
         `
         <div class="countrie-card"
