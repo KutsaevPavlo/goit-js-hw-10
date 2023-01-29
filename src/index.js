@@ -1,58 +1,77 @@
 import './css/styles.css';
-import debounce from 'lodash.debounce';
 import API from "./fetchCountries.js"
-import { functions, join } from 'lodash';
+import Notiflix from 'notiflix';
+
+
 const DEBOUNCE_DELAY = 300;
 const _ = require('lodash');
-
 const countryList = document.querySelector(".country-list");
 const countryInfo = document.querySelector(".country-info");
-
-
-//TEST
-API.fetchCountries("sw").then(console.log);
-//TEST 2
-API.fetchCountries("sweden").then((data) => {
-    console.log(createMarkup(data));
-    console.log(createMarkupForMoreThenTwo(data));
-    
-    
-    const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
-    const markupForOne= createMarkup(data);
-    if (data.length > 10) {
-        console.log("Too many matches found. Please enter a more specific name")} 
-        else if(data.length >= 2 && data.length < 10) {
-        addMarkup(countryList, markupForMoreThenTwo);
-        }
-        else 
-        addMarkup(countryInfo, markupForOne);
-        console.log(data.length);
-    });
-
 const form = document.getElementById("search-box");
 
 form.addEventListener("input", _.debounce(onInput, DEBOUNCE_DELAY));
-// form.addEventListener("input", onInput);
+
+// //TEST
+// API.fetchCountries("sw").then(console.log);
+// //TEST 2
+// API.fetchCountries("sw").then((data) => {
+//     console.log(createMarkup(data));
+//     console.log(createMarkupForMoreThenTwo(data));
+    
+    
+//     const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
+//     const markupForOne= createMarkup(data);
+//     if (data.length > 10) {
+//         Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
+//         else if(data.length >= 2 && data.length < 10) {
+//         addMarkup(countryList, markupForMoreThenTwo);
+//         }
+//         else 
+//         addMarkup(countryInfo, markupForOne);
+//         console.log(data.length);
+//     });
+
+
+
 
 function onInput(e){
     e.preventDefault();
-  
-    // const form = e.currentTarget;
-    const form = e.target;
-    // console.dir(form);
-    const inputValue = form.value.trim() != '';
-    // console.log(inputValue);
+
+   
+    const inputValue = e.target.value.trim();
+
+            // if(form.value = '' ){
+            //     cleanerMarkup(countryList);
+            //     cleanerMarkup(countryInfo);
+            // }
+
     API.fetchCountries(inputValue).then((data) => {
-        console.log(createMarkup(data));
-    });
+        
+        const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
+        const markupForOne= createMarkup(data);
+
+        console.log(data);
+
+        if (data.length > 10) {
+            Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
+
+            else if(data.length >= 2 && data.length < 10) {
+            addMarkup(countryList, markupForMoreThenTwo);}
+          
+            else 
+            addMarkup(countryInfo, markupForOne);
+            
+           
+        });
+    
     };
 
     function createMarkup(data){
         return data
         .map(({ name, capital, population, flags, languages}) => {
             return `
-            <div class="countrie-card">
-            <img src="${flags.svg}" alt="" width="50" height="50"> <h2>${name.official}</h2>
+            <div class="countrie">
+             <h2 class="countrie-card-titel"> <img src="${flags.svg}" alt="" width="70" height="50"> ${name.official}</h2>
             <p>Capital: ${capital}</p>
             <p>Population: ${population}</p>
             <p>Languages: ${Object.values(languages)}</p>
@@ -68,8 +87,7 @@ function onInput(e){
         .map(({ name, flags}) => {
             return `
             <div class="countrie-card">
-            <img src="${flags.svg}" alt="" width="50" height="50"> <p>${name.official}</p>
-           
+            <img src="${flags.svg}" alt="" width="50" height="30"> <p>${name.official}</p>
             </div>
             `
         })
@@ -78,8 +96,14 @@ function onInput(e){
     
 
 
-
     function addMarkup(element, constMarkup) {
         element.insertAdjacentHTML("beforeend", constMarkup);
       }
  
+
+    //   Cleaner
+    function cleanerMarkup(element) {
+        element.remove();
+      }
+
+   

@@ -1,4 +1,4 @@
-//export
+import Notiflix from 'notiflix';
 
 const ENDPOINT = "https://restcountries.com/v3.1/name"
 
@@ -6,7 +6,8 @@ function fetchCountries(name){
 return fetch(`${ENDPOINT}/${name}?fields=name,capital,population,flags,languages`)
 .then((response) => {
     if(!response.ok){
-        throw new Error(response.statusText)
+        Notiflix.Notify.failure("Oops, there is no country with that name")
+        throw new Error(response.statusText);
     }
     return response.json()
 });
@@ -15,40 +16,4 @@ return fetch(`${ENDPOINT}/${name}?fields=name,capital,population,flags,languages
 export default { fetchCountries };
 
 
-
-// .then(
-//     (response) => {
-//       if (!response.ok) {
-//         throw new Error(response.status);
-//       }
-//       return response.json();
-//     });
-
-
-
-// export const getData = (name) => {
-//   return fetch(`${BASE_URL}${name}`).then((response) => {
-//     if (!response.ok) {
-//       throw new Error(response.statusText);
-//     }
-//     return response.json();
-//   });
-// };
-
-
-
-
-
-// https://restcountries.com/v2/{service}?fields={field},{field},{field}
-
-// https://restcountries.com/v2/all?fields=name,capital,currencies
-
-
-// Тобі потрібні тільки наступні властивості:
-
-// name.official - повна назва країни
-// capital - столиця
-// population - населення
-// flags.svg - посилання на зображення прапора
-// languages - масив мов
 
