@@ -4,15 +4,38 @@ const ENDPOINT = "https://restcountries.com/v3.1/name"
 
 function fetchCountries(name){
 return fetch(`${ENDPOINT}/${name}?fields=name,capital,population,flags,languages`)
-.then((res) => {
-    if(!res.ok){
-        throw new Error(res.statusText)
+.then((response) => {
+    if(!response.ok){
+        throw new Error(response.statusText)
     }
-    return res.json()
+    return response.json()
 });
 }
 
 export default { fetchCountries };
+
+
+
+// .then(
+//     (response) => {
+//       if (!response.ok) {
+//         throw new Error(response.status);
+//       }
+//       return response.json();
+//     });
+
+
+
+// export const getData = (name) => {
+//   return fetch(`${BASE_URL}${name}`).then((response) => {
+//     if (!response.ok) {
+//       throw new Error(response.statusText);
+//     }
+//     return response.json();
+//   });
+// };
+
+
 
 
 
