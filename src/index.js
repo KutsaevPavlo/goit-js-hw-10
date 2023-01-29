@@ -32,18 +32,15 @@ form.addEventListener("input", _.debounce(onInput, DEBOUNCE_DELAY));
 //     });
 
 
+if(form.value = ''){
+                cleanerMarkup(countryList);
+                cleanerMarkup(countryInfo);
+            }
 
 
 function onInput(e){
     e.preventDefault();
-
-   
     const inputValue = e.target.value.trim();
-
-            // if(form.value = '' ){
-            //     cleanerMarkup(countryList);
-            //     cleanerMarkup(countryInfo);
-            // }
 
     API.fetchCountries(inputValue).then((data) => {
         
@@ -62,7 +59,8 @@ function onInput(e){
             addMarkup(countryInfo, markupForOne);
             
            
-        });
+        })
+        .catch(error => console.error(error));
     
     };
 
