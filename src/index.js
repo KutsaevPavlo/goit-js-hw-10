@@ -100,8 +100,18 @@ function onInput(e){
  
 
     //   Cleaner
+
+   
+
     function cleanerMarkup(element) {
         element.remove();
       }
 
-   
+
+ // //Якщо у властивість innerHTML записати порожній рядок, 
+    // то вміст елемента буде очищено. 
+    // Це простий і швидкий спосіб видалення всього вмісту.
+
+    //   function cleanerMarkup(element) {
+    //     element.innerHTML = '';
+    //      }
