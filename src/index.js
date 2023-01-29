@@ -11,25 +11,6 @@ const form = document.getElementById("search-box");
 
 form.addEventListener("input", _.debounce(onInput, DEBOUNCE_DELAY));
 
-// //TEST
-// API.fetchCountries("sw").then(console.log);
-// //TEST 2
-// API.fetchCountries("sw").then((data) => {
-//     console.log(createMarkup(data));
-//     console.log(createMarkupForMoreThenTwo(data));
-    
-    
-//     const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
-//     const markupForOne= createMarkup(data);
-//     if (data.length > 10) {
-//         Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
-//         else if(data.length >= 2 && data.length < 10) {
-//         addMarkup(countryList, markupForMoreThenTwo);
-//         }
-//         else 
-//         addMarkup(countryInfo, markupForOne);
-//         console.log(data.length);
-//     });
 
 
 
@@ -59,17 +40,17 @@ function onInput(e){
                     cleanerMarkup(countryInfo);
                 }
                 
-        })
-        .catch(error => console.error(error));
-    
-    };
-
-    function createMarkup(data){
-        return data
+            })
+            .catch(error => console.error(error));
+            
+        };
+        
+        function createMarkup(data){
+            return data
         .map(({ name, capital, population, flags, languages}) => {
             return `
             <div class="countrie">
-             <h2 class="countrie-card-titel"> <img src="${flags.svg}" alt="" width="70" height="50"> ${name.official}</h2>
+            <h2 class="countrie-card-titel"> <img src="${flags.svg}" alt="" width="70" height="50"> ${name.official}</h2>
             <p>Capital: ${capital}</p>
             <p>Population: ${population}</p>
             <p>Languages: ${Object.values(languages)}</p>
@@ -79,7 +60,7 @@ function onInput(e){
         .join("");
     }
     
-
+    
     function createMarkupForMoreThenTwo(data){
         return data
         .map(({ name, flags}) => {
@@ -92,26 +73,48 @@ function onInput(e){
         .join("");
     }
     
-
-
+    
+    
     function addMarkup(element, constMarkup) {
         element.insertAdjacentHTML("beforeend", constMarkup);
-      }
- 
-
+    }
+    
+    
     //   Cleaner
-
-   
-
+    
+    
+    
     function cleanerMarkup(element) {
         element.remove();
-      }
+    }
 
-
- // //Якщо у властивість innerHTML записати порожній рядок, 
+    
+    // //Якщо у властивість innerHTML записати порожній рядок, 
     // то вміст елемента буде очищено. 
     // Це простий і швидкий спосіб видалення всього вмісту.
-
+    
     //   function cleanerMarkup(element) {
-    //     element.innerHTML = '';
-    //      }
+        //     element.innerHTML = '';
+        //      }
+
+
+        
+        // //TEST
+        // API.fetchCountries("sw").then(console.log);
+        // //TEST 2
+        // API.fetchCountries("sw").then((data) => {
+        //     console.log(createMarkup(data));
+        //     console.log(createMarkupForMoreThenTwo(data));
+            
+            
+        //     const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
+        //     const markupForOne= createMarkup(data);
+        //     if (data.length > 10) {
+        //         Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
+        //         else if(data.length >= 2 && data.length < 10) {
+        //         addMarkup(countryList, markupForMoreThenTwo);
+        //         }
+        //         else 
+        //         addMarkup(countryInfo, markupForOne);
+        //         console.log(data.length);
+        //     });
