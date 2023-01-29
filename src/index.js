@@ -32,33 +32,33 @@ form.addEventListener("input", _.debounce(onInput, DEBOUNCE_DELAY));
 //     });
 
 
-if(form.value = ''){
-                cleanerMarkup(countryList);
-                cleanerMarkup(countryInfo);
-            }
-
 
 function onInput(e){
     e.preventDefault();
-    const inputValue = e.target.value.trim();
-
+    let inputValue = e.target.value.trim();
+    
     API.fetchCountries(inputValue).then((data) => {
         
         const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
         const markupForOne= createMarkup(data);
-
+        
         console.log(data);
-
+        
+        
         if (data.length > 10) {
             Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
-
-            else if(data.length >= 2 && data.length < 10) {
-            addMarkup(countryList, markupForMoreThenTwo);}
-          
-            else 
-            addMarkup(countryInfo, markupForOne);
             
-           
+            else if(data.length >= 2 && data.length < 10) {
+                addMarkup(countryList, markupForMoreThenTwo);}
+                
+                else 
+                addMarkup(countryInfo, markupForOne);
+                
+                if( inputValue = '' ){
+                    cleanerMarkup(countryList);
+                    cleanerMarkup(countryInfo);
+                }
+                
         })
         .catch(error => console.error(error));
     
