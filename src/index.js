@@ -1,7 +1,7 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import API from "./fetchCountries.js"
-import { functions } from 'lodash';
+import { functions, join } from 'lodash';
 const DEBOUNCE_DELAY = 300;
 const _ = require('lodash');
 
@@ -26,15 +26,19 @@ function onInput(e){
     };
 
 
-    function createMarkup({ capital, population, flags, languages}){
-        return `
-        <div class="countrie-card"
-        <h2>${name}</h2>
-        <p>Capital: ${capital}</p>
-        <p>Population: ${population}</p>
-        <p>Languages: ${languages}</p>
-        </div>
-        `
+    function createMarkup(data){
+        return data
+        .map(({ name, capital, population, flags, languages}) => {
+            return `
+            <div class="countrie-card">
+            <h2>${name.official}</h2>
+            <p>Capital: ${capital}</p>
+            <p>Population: ${population}</p>
+            <p>Languages: ${languages}</p>
+            </div>
+            `
+        })
+        .join("");
     }
 
 
