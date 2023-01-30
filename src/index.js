@@ -18,6 +18,16 @@ function onInput(e){
     e.preventDefault();
     let inputValue = e.target.value.trim();
     
+    cleanerMarkup(countryList);
+    cleanerMarkup(countryInfo);
+
+
+    if( inputValue = '' ){
+        return 
+    }
+
+
+
     API.fetchCountries(inputValue).then((data) => {
         
         const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
@@ -29,19 +39,14 @@ function onInput(e){
         if (data.length > 10) {
             Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
             
-            else if(data.length >= 2 && data.length < 10) {
-                addMarkup(countryList, markupForMoreThenTwo);}
+        else if(data.length >= 2 && data.length < 10) {
+        addMarkup(countryList, markupForMoreThenTwo);}
                 
-                else 
-                addMarkup(countryInfo, markupForOne);
-                
-                if( inputValue = '' ){
-                    cleanerMarkup(countryList);
-                    cleanerMarkup(countryInfo);
-                }
-                
-            })
-            .catch(error => console.error(error));
+        else 
+        addMarkup(countryInfo, markupForOne);
+        })
+            // .catch(error => console.error(error));
+        .catch(error => Notiflix.Notify.failure("Oops, there is no country with that name"));
             
         };
         
@@ -84,18 +89,18 @@ function onInput(e){
     
     
     
-    function cleanerMarkup(element) {
-        element.remove();
-    }
+    // function cleanerMarkup(element) {
+    //     element.remove();
+    // }
 
     
     // //Якщо у властивість innerHTML записати порожній рядок, 
     // то вміст елемента буде очищено. 
     // Це простий і швидкий спосіб видалення всього вмісту.
     
-    //   function cleanerMarkup(element) {
-        //     element.innerHTML = '';
-        //      }
+      function cleanerMarkup(element) {
+            element.innerHTML = '';
+             }
 
 
         
