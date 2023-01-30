@@ -45,8 +45,8 @@ function onInput(e){
         else 
         addMarkup(countryInfo, markupForOne);
         })
-            // .catch(error => console.error(error));
-        .catch(error => Notiflix.Notify.failure("Oops, there is no country with that name"));
+        .catch(error => console.error(error));
+        // .catch(error => Notiflix.Notify.failure("Oops, there is no country with that name"));
             
         };
         
@@ -99,7 +99,7 @@ function onInput(e){
     // Це простий і швидкий спосіб видалення всього вмісту.
     
       function cleanerMarkup(element) {
-            element.innerHTML = '';
+           return  element.innerHTML = '';
              }
 
 
