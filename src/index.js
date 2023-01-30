@@ -20,13 +20,13 @@ form.addEventListener("input", _.debounce(onInput, DEBOUNCE_DELAY));
 function onInput(e){
     e.preventDefault();
     let inputValue = e.target.value.trim();
-    
-    // if( inputValue = '' ){
-    //     return 
-    // };
 
     cleanerMarkup(countryList);
     cleanerMarkup(countryInfo);
+
+    if(inputValue === ''){
+        return 
+    };   
 
     API.fetchCountries(inputValue).then((data) => {
         
