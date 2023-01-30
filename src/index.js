@@ -9,24 +9,24 @@ const countryList = document.querySelector(".country-list");
 const countryInfo = document.querySelector(".country-info");
 const form = document.getElementById("search-box");
 
+
+
+     
+
+
 form.addEventListener("input", _.debounce(onInput, DEBOUNCE_DELAY));
-
-
 
 
 function onInput(e){
     e.preventDefault();
     let inputValue = e.target.value.trim();
     
+    // if( inputValue = '' ){
+    //     return 
+    // };
+
     cleanerMarkup(countryList);
     cleanerMarkup(countryInfo);
-
-
-    if( inputValue = '' ){
-        return 
-    }
-
-
 
     API.fetchCountries(inputValue).then((data) => {
         
@@ -63,10 +63,9 @@ function onInput(e){
             `
         })
         .join("");
-    }
+    };
     
-    
-    function createMarkupForMoreThenTwo(data){
+ function createMarkupForMoreThenTwo(data){
         return data
         .map(({ name, flags}) => {
             return `
@@ -80,7 +79,7 @@ function onInput(e){
     
     
     
-    function addMarkup(element, constMarkup) {
+function addMarkup(element, constMarkup) {
         element.insertAdjacentHTML("beforeend", constMarkup);
     }
     
@@ -98,28 +97,28 @@ function onInput(e){
     // то вміст елемента буде очищено. 
     // Це простий і швидкий спосіб видалення всього вмісту.
     
-      function cleanerMarkup(element) {
+function cleanerMarkup(element) {
            return  element.innerHTML = '';
              }
 
 
         
-        // //TEST
-        // API.fetchCountries("sw").then(console.log);
-        // //TEST 2
-        // API.fetchCountries("sw").then((data) => {
-        //     console.log(createMarkup(data));
-        //     console.log(createMarkupForMoreThenTwo(data));
-            
-            
-        //     const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
-        //     const markupForOne= createMarkup(data);
-        //     if (data.length > 10) {
-        //         Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
-        //         else if(data.length >= 2 && data.length < 10) {
-        //         addMarkup(countryList, markupForMoreThenTwo);
-        //         }
-        //         else 
-        //         addMarkup(countryInfo, markupForOne);
-        //         console.log(data.length);
-        //     });
+        //TEST
+//  API.fetchCountries("sw").then(console.log);
+//  //TEST 2
+//  API.fetchCountries("sw").then((data) => {
+//      console.log(createMarkup(data));
+//      console.log(createMarkupForMoreThenTwo(data));
+     
+     
+//      const markupForMoreThenTwo= createMarkupForMoreThenTwo(data);
+//      const markupForOne= createMarkup(data);
+//      if (data.length > 10) {
+//          Notiflix.Notify.info("Too many matches found. Please enter a more specific name")} 
+//          else if(data.length >= 2 && data.length < 10) {
+//          addMarkup(countryList, markupForMoreThenTwo);
+//          }
+//          else 
+//          addMarkup(countryInfo, markupForOne);
+//          console.log(data.length);
+//      });
